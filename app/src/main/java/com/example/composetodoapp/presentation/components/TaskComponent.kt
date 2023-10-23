@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.example.composetodoapp.data.TaskPriority
 
 @Composable
-fun taskComponent(
+fun TaskComponent(
     taskTitle: String,
     taskDescription: String,
     taskPriority: TaskPriority,
@@ -85,7 +85,7 @@ fun taskComponentPreview() {
             .fillMaxSize()
             .background(Color.White)
     ) {
-        taskComponent(
+        TaskComponent(
             taskTitle = "title",
             taskDescription = "description",
             taskPriority = TaskPriority.HIGH

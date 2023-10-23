@@ -1,5 +1,6 @@
 package com.example.composetodoapp.data
 
+import androidx.compose.runtime.MutableState
 import kotlinx.coroutines.flow.Flow
 
 class TaskRepositoryImpl(
@@ -17,7 +18,7 @@ class TaskRepositoryImpl(
         return dao.getTaskById(id = id)
     }
 
-    override fun getTasks(): Flow<List<Task>> {
+    override fun getTasks(): List<Task> {
         return dao.getTasks()
     }
 }

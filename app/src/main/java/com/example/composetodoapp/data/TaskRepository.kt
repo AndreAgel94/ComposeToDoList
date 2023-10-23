@@ -1,6 +1,6 @@
 package com.example.composetodoapp.data
 
-import kotlinx.coroutines.flow.Flow
+import androidx.compose.runtime.MutableState
 
 interface TaskRepository {
 
@@ -13,5 +13,5 @@ interface TaskRepository {
     suspend fun getTaskById(id: Int): Task?
 
 
-    fun getTasks(): Flow<List<Task>>
+    fun getTasks(): List<Task>
 }

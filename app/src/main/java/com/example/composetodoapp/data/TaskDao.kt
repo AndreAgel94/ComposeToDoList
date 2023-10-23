@@ -1,11 +1,7 @@
 package com.example.composetodoapp.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
+import androidx.compose.runtime.MutableState
+import androidx.room.*
 
 @Dao
 interface TaskDao {
@@ -20,5 +16,5 @@ interface TaskDao {
     suspend fun getTaskById(id: Int) : Task?
 
     @Query("SELECT * FROM Task")
-    fun getTasks(): Flow<List<Task>>
+    fun getTasks(): List<Task>
 }
