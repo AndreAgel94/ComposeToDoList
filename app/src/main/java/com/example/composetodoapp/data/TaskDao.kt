@@ -1,20 +1,20 @@
 package com.example.composetodoapp.data
 
-import androidx.compose.runtime.MutableState
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTask(task: Task)
+    fun insertTask(taskEntity: TaskEntity)
+
+    @Query("SELECT * FROM `tasks`")
+    fun getTasks(): Flow<List<TaskEntity>>
+
+    @Update
+    fun updateTasks(task: TaskEntity)
 
     @Delete
-    suspend fun deleteTask(task: Task)
-
-    @Query("SELECT * FROM task WHERE id =:id")
-    suspend fun getTaskById(id: Int) : Task?
-
-    @Query("SELECT * FROM Task")
-    fun getTasks(): List<Task>
+    fun deleteTask(task: TaskEntity)
 }

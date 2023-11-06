@@ -1,17 +1,12 @@
 package com.example.composetodoapp.data
 
-import androidx.compose.runtime.MutableState
+import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {
 
-    suspend fun insertTask(task: Task)
+    suspend fun getTasks(): Flow<List<TaskEntity>>
+    suspend fun insertTask(task: TaskEntity)
+    suspend fun updateTask(task: TaskEntity)
+    suspend fun deleteTask(task: TaskEntity)
 
-
-    suspend fun deleteTask(task: Task)
-
-
-    suspend fun getTaskById(id: Int): Task?
-
-
-    fun getTasks(): List<Task>
 }

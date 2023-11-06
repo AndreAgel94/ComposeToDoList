@@ -1,5 +1,6 @@
 package com.example.composetodoapp.presentation.task_list
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -7,6 +8,8 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -17,43 +20,18 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.composetodoapp.data.Task
-import com.example.composetodoapp.data.TaskPriority
+import com.example.composetodoapp.presentation.TaskViewModel
 import com.example.composetodoapp.presentation.components.TaskComponent
 
 
 @Composable
 fun TaskListScreen(
     navController: NavController,
-    viewModel: TaskListViewModel = hiltViewModel()
+    viewModel: TaskViewModel = hiltViewModel()
+
 ) {
-    val taskList = viewModel.tasks.value
-    val taskListTest = listOf(
-        Task(
-            "title",
-            "description",
-            false,
-            TaskPriority.HIGH
-        ),
-        Task(
-            "title",
-            "description",
-            false,
-            TaskPriority.HIGH
-        ),
-        Task(
-            "title",
-            "description",
-            false,
-            TaskPriority.HIGH
-        ),
-        Task(
-            "title",
-            "description",
-            false,
-            TaskPriority.HIGH
-        ),
-    )
+
+    val tasks by viewModel.tasks.collectAsState()
 
     Box(
         modifier = Modifier
@@ -75,10 +53,11 @@ fun TaskListScreen(
 
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items(taskListTest) {
+                items(tasks) {
+                    Log.d("taskScreen","listvalue $tasks")
                     TaskComponent(
                         taskTitle = it.title,
                         taskDescription = it.description,
